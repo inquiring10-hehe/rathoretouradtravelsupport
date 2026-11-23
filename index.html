@@ -192,7 +192,7 @@ var message=document.getElementById('m').value.trim();
 var subject='New booking enquiry: '+destination+' - '+name;
 var body='Name: '+name+'\nPhone: '+phone+'\nInterested in: '+destination+'\n\nTravel details:\n'+message;
 var gmailUrl='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent('rathoretourandtravelssupport@gmail.com')+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-window.open(gmailUrl,'_blank','noopener,noreferrer');
+window.location.assign(gmailUrl);
 });
 
 document.getElementById('whatsappEnquiry').addEventListener('click',function(){
@@ -206,7 +206,7 @@ if(!name || !phone){
  return;
 }
 var body='New booking enquiry%0A%0AName: '+encodeURIComponent(name)+'%0APhone: '+encodeURIComponent(phone)+'%0AInterested in: '+encodeURIComponent(destination)+'%0A%0ATravel details: '+encodeURIComponent(message);
-window.open('https://wa.me/919876143395?text='+body,'_blank','noopener,noreferrer');
+window.location.assign('https://wa.me/919876143395?text='+body);
 });
 
 var welcomePopup=document.getElementById('welcomePopup');
