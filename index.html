@@ -174,7 +174,11 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);text
 <input id="p" inputmode="tel" placeholder="Phone number" required=""/>
 <select id="d"><option>Char Dham Yatra</option><option>Kedarnath &amp; Badrinath</option><option>Nainital &amp; Mussoorie</option><option>Rishikesh &amp; Haridwar</option><option>Kerala Backwaters</option><option>Chandigarh City Tour</option><option>Cab / Car rental</option><option>Group / family booking - ask for group pricing</option><option>Other India tour / Custom</option></select>
 <textarea id="m" placeholder="Travel dates, number of people…" rows="3"></textarea>
+<div class="form-actions" style="display:flex;gap:10px;flex-wrap:wrap">
 <button class="btn" type="submit">Send by Email</button>
+<button class="btn" id="whatsappEnquiry" type="button" style="background:#25D366">Send by WhatsApp</button>
+</div>
+<p id="formStatus" aria-live="polite"></p>
 </form></div></section>
 </main>
 <footer><div class="wrap">© 2026 Rathore Tour &amp; Travels · Govt. Registered · Estd. 2012 · Uttarakhand focused<br/>Owned by Tej Singh Rathore · Managed by Rahul Rathore<br/>📞 +91-98761-43395 · rathoretourandtravelssupport@gmail.com</div></footer>
@@ -187,7 +191,22 @@ var destination=document.getElementById('d').value;
 var message=document.getElementById('m').value.trim();
 var subject='New booking enquiry: '+destination+' - '+name;
 var body='Name: '+name+'\nPhone: '+phone+'\nInterested in: '+destination+'\n\nTravel details:\n'+message;
-window.location.href='mailto:rathoretourandtravelssupport@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+var gmailUrl='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent('rathoretourandtravelssupport@gmail.com')+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+window.open(gmailUrl,'_blank','noopener,noreferrer');
+});
+
+document.getElementById('whatsappEnquiry').addEventListener('click',function(){
+var name=document.getElementById('n').value.trim();
+var phone=document.getElementById('p').value.trim();
+var destination=document.getElementById('d').value;
+var message=document.getElementById('m').value.trim();
+if(!name || !phone){
+ document.getElementById('formStatus').textContent='Please enter your name and phone number.';
+ document.getElementById('n').focus();
+ return;
+}
+var body='New booking enquiry%0A%0AName: '+encodeURIComponent(name)+'%0APhone: '+encodeURIComponent(phone)+'%0AInterested in: '+encodeURIComponent(destination)+'%0A%0ATravel details: '+encodeURIComponent(message);
+window.open('https://wa.me/919876143395?text='+body,'_blank','noopener,noreferrer');
 });
 
 var welcomePopup=document.getElementById('welcomePopup');
